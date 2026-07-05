@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fariha Karim — AI Engineer & Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   RESET & ROOT VARIABLES
+=========================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:       #0B1415;
+  --bg2:      #0E1A1A;
+  --bg3:      #111D1D;
+  --card:     rgba(93,107,107,0.13);
+  --card-h:   rgba(93,107,107,0.22);
+  --border:   rgba(125,216,213,0.13);
+  --border-h: rgba(125,216,213,0.35);
+  /* Palette from image */
+  --mint:     #7DD8D5;
+  --mint-dim: rgba(125,216,213,0.12);
+  --pink:     #F7CBCA;
+  --pink-dim: rgba(247,203,202,0.12);
+  --teal:     #D5E6E5;
+  --warm:     #CDD3C8;
+  --offwhite: #F1F7F7;
+  --slate:    #5D6B6B;
+  /* Text */
+  --text:     #F1F7F7;
+  --muted:    #8A9E9E;
+  --dim:      #5C7070;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  position:relative
+}
+
+/* ===========================
+   GRID OVERLAY + BLOBS
+=========================== */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(125,216,213,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,216,213,0.04) 1px,transparent 1px);
+  background-size:52px 52px
+}
+.blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(110px)}
+.blob-1{width:550px;height:550px;background:#7DD8D5;opacity:0.07;top:-220px;left:-160px}
+.blob-2{width:450px;height:450px;background:#F7CBCA;opacity:0.06;bottom:-180px;right:-160px}
+.blob-3{width:400px;height:400px;background:#5D6B6B;opacity:0.18;top:38%;left:50%;transform:translateX(-50%)}
+
+/* ===========================
+   FLOATING BOTTOM DOCK
+=========================== */
+.bottom-dock{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+  z-index:200;
+  background:rgba(10,18,19,0.88);
+  border:1px solid var(--border-h);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-radius:999px;padding:8px 16px;
+  display:flex;align-items:center;gap:4px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4)
+}
+.dk{
+  width:42px;height:42px;border-radius:50%;border:none;
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s,color 0.2s;
+  color:var(--muted);text-decoration:none
+}
+.dk:hover{background:var(--card);color:var(--text)}
+.dk.dk-active{color:var(--mint)}
+.dk.dk-mail{
+  background:var(--mint);color:#0B1415;
+  width:44px;height:44px
+}
+.dk.dk-mail:hover{background:var(--teal)}
+.dk svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.dk.dk-mail svg{stroke:#0B1415}
+
+/* ===========================
+   LAYOUT HELPERS
+=========================== */
+main{position:relative;z-index:1}
+section{padding:100px 0}
+.container{max-width:1120px;margin:0 auto;padding:0 28px}
+
+.sec-eye{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;
+  color:var(--mint);display:block;margin-bottom:10px
+}
+.sec-title{
+  font-size:clamp(28px,3.8vw,40px);font-weight:700;line-height:1.13;
+  margin-bottom:48px
+}
+.sec-title span{color:var(--mint)}
+.sec-title .pink{color:var(--pink)}
+
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:28px;
+  transition:border-color 0.28s,background 0.28s
+}
+.card:hover{border-color:var(--border-h);background:var(--card-h)}
+
+/* ===========================
+   FADE ANIMATIONS
+=========================== */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.62s ease,transform 0.62s ease}
+.fade-up.vis{opacity:1;transform:none}
+.fade-up:nth-child(2){transition-delay:0.08s}
+.fade-up:nth-child(3){transition-delay:0.16s}
+.fade-up:nth-child(4){transition-delay:0.24s}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding-top:62px;text-align:center
+}
+.hero-inner{max-width:860px;margin:0 auto;padding:0 28px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--card);border:1px solid var(--border-h);
+  border-radius:999px;padding:8px 20px;
+  font-size:13px;font-weight:500;color:var(--text);
+  margin-bottom:36px;
+  font-family:'JetBrains Mono',monospace;
+  animation:badgePulse 3s ease-in-out infinite
+}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(125,216,213,0.3)}50%{box-shadow:0 0 0 8px rgba(125,216,213,0)}}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.hero-h1{
+  font-size:clamp(48px,8vw,88px);font-weight:700;line-height:1.04;
+  letter-spacing:-0.025em;margin-bottom:22px
+}
+.hero-h1 .line2{display:block}
+.hero-h1 .acc{color:var(--mint)}
+.hero-h1 .acc-pink{color:var(--pink)}
+.hero-mono{
+  font-family:'JetBrains Mono',monospace;font-size:15px;
+  color:var(--muted);margin-bottom:20px;letter-spacing:0.03em
+}
+.hero-desc{
+  font-size:16px;color:var(--muted);max-width:530px;margin:0 auto 40px;line-height:1.72
+}
+.hero-cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.btn{
+  padding:14px 30px;border-radius:10px;font-size:14.5px;font-weight:600;
+  text-decoration:none;transition:all 0.24s;display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Grotesk',sans-serif;cursor:pointer;border:none
+}
+.btn-mint{background:var(--mint);color:#0B1415}
+.btn-mint:hover{background:var(--teal);transform:translateY(-3px);box-shadow:0 12px 30px rgba(125,216,213,0.25)}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border-h)}
+.btn-ghost:hover{border-color:var(--mint);color:var(--mint);transform:translateY(-3px)}
+.hero-stats{display:flex;justify-content:center;gap:56px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-n{display:block;font-size:34px;font-weight:700;color:var(--mint);line-height:1}
+.stat-l{display:block;font-size:12.5px;color:var(--muted);margin-top:5px}
+
+/* ===========================
+   ABOUT SECTION (Image 4 bento grid)
+=========================== */
+#about{background:var(--bg2)}
+.about-bento{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  grid-template-rows:auto auto;
+  gap:16px
+}
+.about-bio{grid-column:1;grid-row:1}
+.about-edu{grid-column:2;grid-row:1}
+.about-bot{grid-column:1;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.avatar-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.ava-circle{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;
+  background:var(--mint-dim);border:2px solid var(--border-h);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:17px;color:var(--mint)
+}
+.ava-name{font-size:16px;font-weight:700}
+.ava-role{font-size:12.5px;color:var(--muted);margin-top:2px}
+.bio-p{font-size:13.5px;color:var(--muted);line-height:1.78;margin-bottom:10px}
+.bio-p strong{color:var(--mint);font-weight:600}
+.bio-p .pink{color:var(--pink)}
+.work-cta{margin-top:20px}
+.col-label{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px
+}
+.edu-entry{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.edu-entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.edu-yr{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);margin-bottom:4px}
+.edu-deg{font-size:13.5px;font-weight:700;margin-bottom:2px}
+.edu-sch{font-size:12px;color:var(--muted)}
+.value-pills{display:flex;flex-wrap:wrap;gap:8px}
+.vpill{
+  padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:500;
+  border:1px solid var(--border);color:var(--muted);
+  background:transparent;transition:all 0.22s
+}
+.vpill:hover{border-color:var(--mint);color:var(--mint)}
+.core-stack{display:flex;flex-wrap:wrap;gap:8px}
+.cstack{
+  padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:500;
+  border:1px solid var(--border);color:var(--muted);
+  background:transparent;transition:all 0.22s
+}
+.cstack:hover{border-color:var(--mint);color:var(--mint)}
+.social-row{display:flex;justify-content:center;gap:12px;margin-top:6px}
+.soc{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--muted);
+  transition:all 0.22s
+}
+.soc:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-dim)}
+.soc svg{width:17px;height:17px;fill:currentColor}
+
+/* ===========================
+   SKILLS (Image 7 style)
+=========================== */
+#skills{}
+.skill-block{margin-bottom:30px}
+.skill-block:last-child{margin-bottom:0}
+.skill-cat{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;display:flex;align-items:center;gap:14px
+}
+.skill-cat::after{content:'';flex:1;height:1px;background:var(--border)}
+.skill-pills{display:flex;flex-wrap:wrap;gap:10px}
+.spill{
+  padding:9px 20px;border-radius:999px;font-size:13px;font-weight:500;
+  border:1px solid var(--border);color:var(--text);
+  background:var(--card);transition:all 0.22s;cursor:default
+}
+.spill:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-dim);transform:translateY(-2px)}
+.spill.sp-pink:hover{border-color:var(--pink);color:var(--pink);background:var(--pink-dim)}
+
+/* ===========================
+   PROJECTS (Images 5-6 style)
+=========================== */
+#projects{background:var(--bg2)}
+.feat-card{
+  border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  display:grid;grid-template-columns:1.05fr 1fr;
+  background:var(--card);margin-bottom:24px;
+  transition:border-color 0.3s
+}
+.feat-card:hover{border-color:var(--border-h)}
+.feat-prev{
+  background:var(--bg3);padding:32px;
+  border-right:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;min-height:300px
+}
+.feat-prev-inner{
+  background:var(--bg);border:1px solid var(--border);border-radius:14px;
+  width:100%;height:100%;min-height:220px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px
+}
+.fp-emoji{font-size:36px}
+.fp-url{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+.feat-info{padding:36px}
+.proj-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pcat{
+  padding:5px 13px;border-radius:999px;font-size:12px;font-weight:500;
+  border:1px solid var(--border);color:var(--muted);background:var(--card)
+}
+.proj-name{font-size:22px;font-weight:700;margin-bottom:12px}
+.proj-desc{font-size:13.5px;color:var(--muted);line-height:1.72;margin-bottom:20px}
+.tech-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.tech-tag{
+  padding:5px 12px;border-radius:7px;font-size:12px;font-weight:500;
+  background:rgba(93,107,107,0.22);color:var(--muted)
+}
+.proj-btns{display:flex;gap:12px}
+.pbtn{
+  padding:11px 20px;border-radius:9px;font-size:13px;font-weight:600;
+  text-decoration:none;transition:all 0.22s;display:inline-flex;align-items:center;gap:6px
+}
+.pbtn-mint{background:var(--mint);color:#0B1415}
+.pbtn-mint:hover{background:var(--teal);transform:translateY(-2px)}
+.pbtn-ghost{border:1px solid var(--border);color:var(--muted);background:transparent}
+.pbtn-ghost:hover{border-color:var(--mint);color:var(--mint);transform:translateY(-2px)}
+
+/* small project grid */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proj-mini{}
+.pm-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:12px}
+.pm-name{font-size:15px;font-weight:700;margin-bottom:10px}
+.pm-desc{font-size:13px;color:var(--muted);line-height:1.68;margin-bottom:14px}
+.pm-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pm-links{display:flex;gap:12px}
+.pm-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.pm-link:hover{color:var(--mint)}
+
+/* ===========================
+   EXPERIENCE & CERTS (Images 8 style)
+=========================== */
+#experience{}
+.ec-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.col-head{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:24px;display:flex;align-items:center;gap:12px
+}
+.col-head::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Experience timeline */
+.exp-timeline{display:flex;flex-direction:column}
+.exp-item{display:flex;gap:18px;position:relative}
+.exp-item:not(:last-child) .exp-bar{
+  position:absolute;left:6px;top:14px;
+  width:1px;height:100%;background:var(--border)
+}
+.exp-dot{
+  width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:3px;
+  border:2px solid var(--mint);background:var(--bg);position:relative;z-index:1
+}
+.exp-body{padding-bottom:28px;flex:1}
+.exp-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);margin-bottom:8px}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color 0.28s}
+.exp-card:hover{border-color:var(--border-h)}
+.exp-role{font-size:15px;font-weight:700;margin-bottom:3px}
+.exp-org{font-size:13px;color:var(--muted);margin-bottom:13px}
+.exp-bullets{list-style:none}
+.exp-bullets li{font-size:13px;color:var(--muted);line-height:1.65;padding-left:14px;position:relative;margin-bottom:5px}
+.exp-bullets li::before{content:'·';position:absolute;left:2px;color:var(--mint);font-size:20px;line-height:1;top:-2px}
+.exp-badge{
+  display:inline-block;margin-top:12px;padding:5px 12px;border-radius:999px;
+  font-size:11px;border:1px solid var(--border);color:var(--muted);
+  font-family:'JetBrains Mono',monospace
+}
+
+/* Certs */
+.cert-list{display:flex;flex-direction:column;gap:12px}
+.cert-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:18px 20px;display:flex;align-items:flex-start;gap:14px;
+  transition:all 0.28s
+}
+.cert-card:hover{border-color:var(--border-h);transform:translateX(4px)}
+.cert-ico{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--mint-dim);border:1px solid var(--border-h);
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0
+}
+.cert-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.cert-by{font-size:12.5px;color:var(--muted);margin-bottom:3px}
+.cert-yr{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint)}
+
+
+
+/* ===========================
+   CONTACT (Image 10 style)
+=========================== */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-big{font-size:clamp(30px,4.5vw,52px);font-weight:700;line-height:1.15;margin-bottom:16px}
+.contact-big span{color:var(--mint)}
+.contact-big .pink{color:var(--pink)}
+.contact-sub{font-size:15px;color:var(--muted);line-height:1.72;margin-bottom:32px}
+.contact-rows{display:flex;flex-direction:column;gap:10px}
+.contact-row{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  text-decoration:none;color:var(--text);transition:all 0.24s
+}
+.contact-row:hover{border-color:var(--mint);transform:translateX(5px)}
+.cr-icon{
+  width:38px;height:38px;border-radius:10px;background:var(--mint-dim);
+  border:1px solid var(--border-h);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.cr-icon svg{width:17px;height:17px;stroke:var(--mint);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cr-label{font-size:12px;color:var(--muted)}
+.cr-val{font-size:14px;font-weight:600}
+.cr-arrow{margin-left:auto;color:var(--muted);font-size:17px}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--mint-dim);
+  border: 1px solid var(--border-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--mint);
+}
+
+.footer-brand .text-muted {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.22s;
+}
+
+.footer-nav a:hover {
+  color: var(--mint);
+}
+
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media(max-width:960px){
+  .about-bento{grid-template-columns:1fr}
+  .about-edu,.about-bot{grid-column:1;grid-row:auto}
+  .ec-grid{grid-template-columns:1fr}
+  .feat-card{grid-template-columns:1fr}
+  .feat-prev{border-right:none;border-bottom:1px solid var(--border)}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .edu-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-tagline{display:none}
+  .nav-links{gap:18px}
+}
+@media(max-width:640px){
+  section{padding:72px 0}
+  .hero-h1{font-size:40px}
+  .hero-stats{gap:32px}
+  .stat-n{font-size:28px}
+  .proj-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-cta{padding:8px 14px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- ===== FLOATING BOTTOM DOCK ===== -->
+<div class="bottom-dock" id="dock">
+  <a href="#hero" class="dk dk-active" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  </a>
+  <a href="#about" class="dk" title="About">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </a>
+  <a href="#projects" class="dk" title="Projects">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+  </a>
+  <a href="#experience" class="dk" title="Experience">
+    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+  </a>
+  <a href="#contact" class="dk dk-mail" title="Contact">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </a>
+</div>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI Engineer &amp; Full Stack Developer
+      </div>
+      <h1 class="hero-h1">
+        Turning <span class="acc">Ideas</span> Into<span class="line2">Living <span class="acc">Interfaces.</span></span>
+      </h1>
+      <p class="hero-desc">I build clean, intelligent web experiences — from full-stack platforms to AI-powered tools. Fast, beautiful, and purposeful.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-mint">View Projects →</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n">15+</span><span class="stat-l">Tech Stack</span></div>
+        <div class="stat"><span class="stat-n">10+</span><span class="stat-l">Projects Built</span></div>
+        <div class="stat"><span class="stat-n">2+</span><span class="stat-l">Years Experience</span></div>
+        <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Cups of Coffee</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <span class="sec-eye">About</span>
+    <h2 class="sec-title">Hi, I'm Fariha — <span>let's get acquainted.</span></h2>
+
+    <div class="about-bento">
+      <!-- Bio -->
+      <div class="card about-bio fade-up">
+        <div class="avatar-row">
+          <div class="ava-circle">FK</div>
+          <div>
+            <div class="ava-name">Fariha Karim</div>
+            <div class="ava-role">Full Stack Developer &amp; AI Engineer</div>
+          </div>
+        </div>
+        <p class="bio-p">I'm an AI Engineer and Full Stack Developer focused on building intelligent and scalable systems that bridge automation and real-world business impact. I specialize in Python, FastAPI, Django, and Agentic AI frameworks — creating solutions from free learning platforms for 1,000s of students to intelligent AI agents.</p>
+        <a href="mailto:karimfariha30@gmail.com" class="btn btn-mint work-cta">Let's work together →</a>
+      </div>
+
+      <!-- Education sidebar -->
+      <div class="card about-edu fade-up">
+        <div class="col-label">Education</div>
+        <div class="edu-entry">
+          <div class="edu-yr">2024 — 2028</div>
+          <div class="edu-deg">BS Computer Science</div>
+          <div class="edu-sch">FAST NUCES — Karachi</div>
+        </div>
+        <div class="edu-entry">
+          <div class="edu-yr">2022 — 2024</div>
+          <div class="edu-deg">Intermediate (Pre-Engineering)</div>
+          <div class="edu-sch">Aga Khan Higher Secondary School</div>
+        </div>
+        <div class="edu-entry">
+          <div class="edu-yr">2020 — 2022</div>
+          <div class="edu-deg">Matriculation</div>
+          <div class="edu-sch">SMS Aga Khan School</div>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="about-bot">
+        <div class="card fade-up">
+          <div class="col-label">What drives me</div>
+          <div class="value-pills">
+            <span class="vpill">Curiosity</span>
+            <span class="vpill">Innovation</span>
+            <span class="vpill">Precision</span>
+            <span class="vpill">Impact</span>
+            <span class="vpill">Creativity</span>
+          </div>
+        </div>
+        <div class="card fade-up">
+          <div class="col-label">Core Stack</div>
+          <div class="core-stack">
+            <span class="cstack">Python</span>
+            <span class="cstack">RAG</span>
+            <span class="cstack">React</span>
+            <span class="cstack">Node.js</span>
+            <span class="cstack">Flask</span>
+            <span class="cstack">JavaScript</span>
+            <span class="cstack">TypeScript</span>
+            <span class="cstack">Groq API</span>
+          </div>
+          </div>
+        </div>
+        <div class="card fade-up" style="display:flex;flex-direction:column;justify-content:center;gap:6px">
+          <div class="col-label" style="text-align:center">Quick connect</div>
+          <div class="social-row">
+            <a href="https://github.com/FarihaKarim12" target="_blank" class="soc" title="GitHub">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/fariha-karim-387090296/" target="_blank" class="soc" title="LinkedIn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="mailto:karimfariha30@gmail.com" class="soc" title="Email" style="fill:none">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="container">
+    <span class="sec-eye">Stack</span>
+    <h2 class="sec-title">Technologies I <span>work with</span></h2>
+
+    <div class="skill-block fade-up">
+      <div class="skill-cat">AI &amp; Machine Learning</div>
+      <div class="skill-pills">
+        <span class="spill">Python</span>
+        <span class="spill">Groq API (Llama 3.3)</span>
+        <span class="spill">OpenAI API</span>
+        <span class="spill">Pandas</span>
+        <span class="spill">NumPy</span>
+        <span class="spill">Scikit-Learn</span>
+        <span class="spill">Matplotlib</span>
+        <span class="spill">Seaborn</span>
+      </div>
+    </div>
+
+    <div class="skill-block fade-up">
+      <div class="skill-cat">Frontend &amp; UI</div>
+      <div class="skill-pills">
+        <span class="spill sp-pink">React 19</span>
+        <span class="spill sp-pink">Next.js 16</span>
+        <span class="spill sp-pink">TypeScript</span>
+        <span class="spill sp-pink">Tailwind CSS</span>
+        <span class="spill sp-pink">HTML5</span>
+        <span class="spill sp-pink">CSS3</span>
+        <span class="spill sp-pink">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skill-block fade-up">
+      <div class="skill-cat">Databases</div>
+      <div class="skill-pills">
+        <span class="spill">PostgreSQL</span>
+        <span class="spill">MySQL</span>
+        <span class="spill">Supabase</span>
+      </div>
+    </div>
+
+    <div class="skill-block fade-up">
+      <div class="skill-cat">DevOps &amp; Tools</div>
+      <div class="skill-pills">
+        <span class="spill">Git / GitHub</span>
+        <span class="spill">Vercel</span>
+        <span class="spill">VS Code</span>
+        <span class="spill">PyCharm</span>
+        <span class="spill">Jupyter Notebook</span>
+        <span class="spill">EmailJS</span>
+      </div>
+    </div>
+
+    <div class="skill-block fade-up">
+      <div class="skill-cat">Systems &amp; Low-Level</div>
+      <div class="skill-pills">
+        <span class="spill">C / C++</span>
+        <span class="spill">Assembly x86</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <span class="sec-eye">Work</span>
+    <h2 class="sec-title">Featured <span>projects</span></h2>
+
+    <!-- Grid -->
+    <div class="proj-grid">
+
+       <div class="card proj-mini fade-up">
+        <div class="pm-num">01</div>
+        <div class="pm-name">Exlr AI — AI-Powered Learning Platform</div>
+        <p class="pm-desc">A full-stack learning platform built for AKUEB SSC &amp; HSSC students across Pakistan. Features an AI doubt solver, 528+ past papers, MCQ quiz engine, exam simulator, admin panel, and email auth.</p>
+        <div class="pm-stack">
+          <span class="tech-tag">Next.js 16</span>
+          <span class="tech-tag">React 19</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Supabase</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Groq API</span>
+          <span class="tech-tag">Tailwind CSS</span>
+          <span class="tech-tag">EmailJS</span>
+        </div>
+        <div class="pm-links">
+          <a href="https://github.com/FarihaKarim12/trip-planner-agent" target="_blank" class="pbtn pbtn-mint">GitHub ↗</a>
+          <a href="https://exlr-ai.vercel.app/" target="_blank" class="pbtn pbtn-ghost">Live Demo ↗</a>
+        </div>
+      </div> 
+
+      <div class="card proj-mini fade-up">
+        <div class="pm-num">02</div>
+        <div class="pm-name">AI-Powered Trip Planner Agent</div>
+        <p class="pm-desc">Goal-based AI agent that generates personalised, optimised day-by-day travel itineraries based on destination, budget, and interests.</p>
+        <div class="pm-stack">
+          <span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">OpenAI API</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span>
+        </div>
+        <div class="pm-links">
+          <a href="https://github.com/FarihaKarim12/trip-planner-agent" target="_blank" class="pbtn pbtn-mint">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="card proj-mini fade-up">
+        <div class="pm-num">03</div>
+        <div class="pm-name">Bazaar — Product Listing Website</div>
+        <p class="pm-desc">Modern responsive product listing site with dynamic rendering, filtering, search, and an interactive shopping cart — pure JavaScript, no frameworks.</p>
+        <div class="pm-stack">
+          <span class="tech-tag">HTML</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="pm-links">
+          <a href="https://github.com/FarihaKarim12/ApexcifyTechnologys_ProductListingWebsite" target="_blank" class="pbtn pbtn-mint">GitHub ↗</a>
+          <a href="https://farihakarim12.github.io/ApexcifyTechnologys_ProductListingWebsite/" target="_blank" class="pbtn pbtn-ghost">Live ↗</a>
+        </div>
+      </div>
+
+      <div class="card proj-mini fade-up">
+        <div class="pm-num">04</div>
+        <div class="pm-name">Graph-Based Path Finder</div>
+        <p class="pm-desc">Directed weighted graph visualizer — BFS, DFS, Dijkstra's, cycle detection, drag-and-drop repositioning. Available in C++ CLI and Web GUI.</p>
+        <div class="pm-stack">
+          <span class="tech-tag">Data Structures</span><span class="tech-tag">Algorithms</span><span class="tech-tag">C++</span>
+        </div>
+        <div class="pm-links">
+          <a href="https://github.com/FarihaKarim12/Graph-Based-Path-Finder" target="_blank" class="pbtn pbtn-mint">GitHub ↗</a>
+          <a href="https://farihakarim12.github.io/Graph-Based-Path-Finder/" target="_blank" class="pbtn pbtn-ghost">Live ↗</a>
+        </div>
+      </div>
+
+      <div class="card proj-mini fade-up">
+        <div class="pm-num">05</div>
+        <div class="pm-name">Apexcify Technologys Site</div>
+        <p class="pm-desc">Fully responsive modern company website with smooth animations, clean interactive UI, and engaging experience. Delivered as an internship project.</p>
+        <div class="pm-stack">
+          <span class="tech-tag">HTML</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="pm-links">
+          <a href="https://github.com/FarihaKarim12/ApexcifyTechnologys_ApexcifyTechnologysWebsite" target="_blank" class="pbtn pbtn-mint">GitHub ↗</a>
+          <a href="https://farihakarim12.github.io/ApexcifyTechnologys_ApexcifyTechnologysWebsite/" target="_blank" class="pbtn pbtn-ghost">Live ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE & CERTIFICATIONS ===== -->
+<section id="experience">
+  <div class="container">
+    <span class="sec-eye">Career</span>
+    <h2 class="sec-title">Experience &amp; <span>Certifications</span></h2>
+
+    <div class="ec-grid">
+      <!-- Left: Experience -->
+      <div>
+        <div class="col-head">Where I've Worked</div>
+        <div class="exp-timeline">
+
+          <div class="exp-item fade-up">
+            <div class="exp-dot"></div>
+            <div class="exp-bar"></div>
+            <div class="exp-body">
+              <div class="exp-date">March 2026 — April 2026</div>
+              <div class="exp-card">
+                <div class="exp-role">Frontend Developer</div>
+                <div class="exp-org">Apexcify Technologys</div>
+                <ul class="exp-bullets">
+                  <li>Build and maintain responsive web pages using HTML, CSS, and JavaScript</li>
+                  <li>Develop interactive web features and ensure smooth user experience</li>
+                  <li>Collaborate on new feature rollouts and UI/UX improvements</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-item fade-up">
+            <div class="exp-dot"></div>
+            <div class="exp-bar"></div>
+            <div class="exp-body">
+              <div class="exp-date">May 2026 — Present</div>
+              <div class="exp-card">
+                <div class="exp-role">Marketing Specialist</div>
+                <div class="exp-org">Aga Khan Development Network</div>
+                <ul class="exp-bullets">
+                  <li>Working with AKS EdTech Initiative on a scalable education model</li>
+                  <li>Supporting teachers in adopting modern digital tools and curriculum</li>
+                  <li>Empowering youth to shift from content consumers to solution creators</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-item fade-up">
+            <div class="exp-dot"></div>
+            <div class="exp-body">
+              <div class="exp-date">July 2026 — Aug 2026</div>
+              <div class="exp-card">
+                <div class="exp-role">Frontend AI Engineer - Intern</div>
+                <div class="exp-org">FlyRank AI</div>
+                <ul class="exp-bullets">
+                  <li>Currently interning at FlyRank AI as a Frontend AI Engineer</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: Certifications -->
+      <div>
+        <div class="col-head">Certifications</div>
+        <div class="cert-list">
+          <div class="cert-card fade-up">
+            <div class="cert-ico">🏆</div>
+            <div>
+              <div class="cert-name">Competitive Programming</div>
+              <div class="cert-by">Coder's Cup — ACM NUCES 2025</div>
+              <div class="cert-yr">2025</div>
+            </div>
+          </div>
+          <div class="cert-card fade-up">
+            <div class="cert-ico">⚡</div>
+            <div>
+              <div class="cert-name">Speed Programming</div>
+              <div class="cert-by">Coder's Cup — ACM NUCES 2024</div>
+              <div class="cert-yr">2024</div>
+            </div>
+          </div>
+          <div class="cert-card fade-up">
+            <div class="cert-ico">🎨</div>
+            <div>
+              <div class="cert-name">Graphic Designing</div>
+              <div class="cert-by">LMS DigiSkills</div>
+              <div class="cert-yr">2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <span class="sec-eye">Contact</span>
+    <div class="contact-grid">
+      <!-- Left -->
+      <div>
+        <h2 class="contact-big">Let's build something <span>amazing.</span></h2>
+        <p class="contact-sub">I'm open to new opportunities, interesting projects, and good conversations. Have a project in mind? I'd love to hear about it. Drop me a message and let's make it happen.</p>
+      </div>
+
+      <div class="contact-rows">
+          <a href="mailto:karimfariha30@gmail.com" class="contact-row">
+            <div class="cr-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div class="cr-label">Email</div><div class="cr-val">karimfariha30@gmail.com</div></div>
+            <div class="cr-arrow">→</div>
+          </a>
+          <a href="https://github.com/FarihaKarim12" target="_blank" class="contact-row">
+            <div class="cr-icon">
+              <svg viewBox="0 0 24 24" stroke="none" fill="var(--mint)"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </div>
+            <div><div class="cr-label">GitHub</div><div class="cr-val">View my projects</div></div>
+            <div class="cr-arrow">→</div>
+          </a>
+          <a href="https://www.linkedin.com/in/fariha-karim-387090296/" target="_blank" class="contact-row">
+            <div class="cr-icon">
+              <svg viewBox="0 0 24 24" stroke="none" fill="var(--mint)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div><div class="cr-label">LinkedIn</div><div class="cr-val">Connect on LinkedIn</div></div>
+            <div class="cr-arrow">→</div>
+          </a>
+          <div class="contact-row" style="cursor:default">
+            <div class="cr-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div><div class="cr-label">Location</div><div class="cr-val">Karachi, Pakistan</div></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-logo">FK</span>
+                <span class="text-muted">Building intelligent systems</span>
+            </div>
+            <div class="footer-nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="footer-copy">© 2026 Fariha Karim. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* ================================================
+   INTERSECTION OBSERVER — fade-up animations
+================================================ */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis') });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+/* ================================================
+   ACTIVE NAV HIGHLIGHTING
+================================================ */
+const sections = [...document.querySelectorAll('section[id]')];
+const navAs = document.querySelectorAll('.nav-links a[data-s]');
+const dockAs = document.querySelectorAll('.dk');
+
+function updateActive() {
+  const scrollY = window.scrollY + 100;
+  let active = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop) active = s.id });
+  navAs.forEach(a => a.classList.toggle('active', a.dataset.s === active));
+  dockAs.forEach(a => {
+    const href = (a.getAttribute('href') || '').replace('#', '');
+    if (!a.classList.contains('dk-mail')) {
+      a.classList.toggle('dk-active', href === active);
+    }
+  });
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+
+/* ================================================
+   CONTACT FORM — EmailJS integration
+   Replace YOUR_PUBLIC_KEY / YOUR_SERVICE_ID / YOUR_TEMPLATE_ID
+   with your actual EmailJS credentials from emailjs.com
+================================================ */
+(function() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  script.onload = function() {
+    try { emailjs.init('YOUR_PUBLIC_KEY'); } catch(e) {}
+  };
+  document.head.appendChild(script);
+})();
+
+function sendMsg() {
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  const btn = document.getElementById('form-btn');
+  const ok = document.getElementById('form-ok');
+  const err = document.getElementById('form-err');
+
+  if (!name || !email || !msg) {
+    err.textContent = '✗ Please fill in all fields.';
+    err.style.display = 'block';
+    return;
+  }
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  ok.style.display = 'none';
+  err.style.display = 'none';
+
+  const doSend = (typeof emailjs !== 'undefined')
+    ? emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { from_name: name, from_email: email, message: msg })
+    : new Promise(res => setTimeout(res, 800));
+
+  doSend.then(() => {
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+    ok.style.display = 'block';
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-email').value = '';
+    document.getElementById('cf-msg').value = '';
+  }).catch(() => {
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+    err.textContent = '✗ Something went wrong. Please email me directly at karimfariha30@gmail.com';
+    err.style.display = 'block';
+  });
+}
+
+/* ================================================
+   SMOOTH HOVER parallax on hero
+================================================ */
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('mousemove', e => {
+    const { innerWidth: w, innerHeight: h } = window;
+    const x = (e.clientX / w - 0.5) * 18;
+    const y = (e.clientY / h - 0.5) * 12;
+    hero.querySelector('.hero-inner').style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+  hero.addEventListener('mouseleave', () => {
+    hero.querySelector('.hero-inner').style.transform = '';
+  });
+}
+</script>
+</body>
+</html>
